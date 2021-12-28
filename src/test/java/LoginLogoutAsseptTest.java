@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 import java.util.concurrent.TimeUnit;
 
 
@@ -17,7 +18,7 @@ public class LoginLogoutAsseptTest {
         System.out.println("Start browser");
         driver = new ChromeDriver();
         System.out.println("Start orangehrm website");
-        driver.get("https://s2.demo.opensourcecms.com/orangehrm/symfony/web/index.php/auth/login");
+        driver.get("https://opensource-demo.orangehrmlive.com/");
         //the window expands to full screen
         driver.manage().window().maximize();
         //test execution delay = 10 sec.
@@ -31,13 +32,13 @@ public class LoginLogoutAsseptTest {
         WebElement loginField = driver.findElement(By.id("txtUsername"));
         WebElement passwordField = driver.findElement(By.xpath("//input[@name=\"txtPassword\"]"));
         //chrome devtools - ctrl-f (//input[@name="txtUsername"])
-        WebElement submitButton = driver.findElement(By.xpath("//input[@type=\"submit\"]"));
+        WebElement submitButton = driver.findElement(By.id("btnLogin"));
 
         //login and chek
-        Assert.assertTrue(driver.getCurrentUrl().contains("login"));
-        loginField.sendKeys("opensourcecms");
-        passwordField.sendKeys("opensourcecms");
+        loginField.sendKeys("Admin");
+        passwordField.sendKeys("admin123");
         submitButton.click();
+        Assert.assertTrue(driver.getCurrentUrl().contains("index.php/dashboard"));
 
 
     }
